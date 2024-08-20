@@ -29,8 +29,8 @@ function Cart() {
   },[cart])
 
   return (
-    <div className='flex justify-center'>
-    <div className={`${sora.className} grid place-items-center`}>
+    <div className='w-max flex justify-center'>
+    <div className={`${sora.className}`}>
     <div className='fixed rounded-[1em] w-[80%] py-[1em] px-[1em] z-50 h-[80vh] bg-orange-400 top-[6em]'>
        <div className='flex justify-between'>
         <p className={`${glass} flex items-center gap-[.8em] text-white px-[1em] py-[.8em] rounded`}>
