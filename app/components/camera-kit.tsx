@@ -15,8 +15,6 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
       const liveRenderTarget = document.getElementById('my-canvas') as HTMLCanvasElement|undefined
       const session = await camerakit.createSession({liveRenderTarget})
       const mediaStream = await navigator.mediaDevices.getUserMedia({video:{
-        width:1280,
-        height:720,
         facingMode:cameraType=="front"?"user":"environment",
       }    });
       const frontotback = ()=>{
@@ -28,7 +26,7 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
         }else{
    return {
     cameraType:cameraType,
-    transform: Transform2D.MirrorY,
+    transform: Transform2D.MirrorX,
    }
         }
       }
@@ -46,7 +44,7 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
         `${lensid}`,
         "d971f3e4-ea9c-4864-bb83-d53f41811cf7"
       );
-
+    source.setRenderSize(window.innerWidth,window.innerHeight)
       await session.applyLens(lens)
       setCamloading(false)
     }
@@ -66,9 +64,9 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
         <Image className='rounded' src='/camera.gif' width={20} height={20} alt='spanner'/>
       </div>}
      </div>
-    <canvas className='w-full object-center object-contain h-[100vh]' id='my-canvas'></canvas></div>
+    <canvas  id='my-canvas'></canvas></div>
   )
 }
 
 export default Camera;
-export const revalidate = 0;
+export const revalidate = 1;
