@@ -27,11 +27,17 @@ function Cart() {
    fetchFromBasedOnId([...ids]);
 
   },[cart])
-
+ const CartProducts = ()=>{
+  return  products?.map((product:praiseGod)=>{
+    return <Cartproducts stateSet={setProducts} id={product.id} Price={product.Price} Description={product.Descrition} Name={product.Name} key={product.id} imgSrc={product.ImageUrl} />
+  })
+ }
   return (
-    <div className='w-full flex justify-center'>
-    <div className={`${sora.className} w-max h-max grid place-items-center mx-auto`}>
+    <div className={`${sora.className} w-full items-center flex justify-center`}>
+
     <div className='fixed rounded-[1em] w-[80%] py-[1em] px-[1em] overflow-auto z-50 h-[80vh] bg-orange-400 top-[6em]'>
+    <button onClick={()=>setShowCart(false)} className='mb-[1em] rounded-[inherit]   backdrop-blur-md bg-white/50  px-[1em]' type='button'>Close</button>
+
        <div className='flex justify-between'>
         <p className={`${glass} flex items-center gap-[.8em] text-white px-[1em] py-[.8em] rounded`}>
           Bag
@@ -41,12 +47,8 @@ function Cart() {
        </div>
        <div>
         {l&&<p>Loading..</p>}
-        {products?.length!=0&&products?.map((product:praiseGod)=>{
-          return <Cartproducts stateSet={setProducts} id={product.id} Price={product.Price} Description={product.Descrition} Name={product.Name} key={product.id} imgSrc={product.ImageUrl} />
-        })}
+        {products?.length!=0?<CartProducts/>:'Your Products will appear here'}
        </div>
-       <button onClick={()=>setShowCart(false)} className=' rounded-[inherit]   backdrop-blur-md bg-white/50  px-[1em]' type='button'>Close</button>
-    </div>
     </div>
     </div>
   )

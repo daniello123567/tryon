@@ -66,7 +66,7 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
         <Image className='rounded' src='/camera.gif' width={20} height={20} alt='spanner'/>
       </div>}
      </div>
-    <canvas className='w-full object-center object-cover h-[100vh]' id='my-canvas'></canvas></div>
+    <canvas className='w-full object-center object-contain h-[100vh]' id='my-canvas'></canvas></div>
   )
 }
 
