@@ -17,8 +17,8 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
       const mediaStream = await navigator.mediaDevices.getUserMedia({video:{
         width:1280,
         height:720,
-        facingMode:cameraType=="front"?"user":"environment"
-      }});
+        facingMode:cameraType=="front"?"user":"environment",
+      }    });
       const frontotback = ()=>{
         if(cameraType=="front"){
           return {
@@ -27,7 +27,8 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
           }
         }else{
    return {
-    cameraType:cameraType
+    cameraType:cameraType,
+    transform: Transform2D.MirrorX,
    }
         }
       }
