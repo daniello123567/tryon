@@ -41,7 +41,7 @@ function Shop() {
     }
   },[filter])
   return (
-    <div className='px-[1em] flex flex-col pb-[2em] gap-y-[1em] bg-[#eaecf1]'>
+    <div className='px-[1em] shop flex flex-col pb-[2em] gap-y-[1em] bg-[#eaecf1]'>
       <p className={`${sora.className} text-center text-[3.625em]`}>Shop</p>
       <Filters/>
       {products?.length==0?<Loading/>:
