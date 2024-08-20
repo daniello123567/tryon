@@ -47,7 +47,7 @@ function Cart() {
        </div>
        <div>
         {l&&<p>Loading..</p>}
-        {products?.length!=0?<CartProducts/>:'Your Products will appear here'}
+        {products?.length!=0?<CartProducts/>:<p className='text-center mt-[3em]'>Your Cart will appear here</p>}
        </div>
     </div>
     </div>
