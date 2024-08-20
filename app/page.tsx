@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react'
 import Hero from './components/Hero'
 import Intro from './components/Intro'
 import Shop from './components/Shop'
-import Header from './components/Header'
 import { MyContext } from './components/mycontext'
 import Cart from './components/Cart'
+import Footer from './components/Footer'
 function Page() {
   const [cart,setcart] = useState<string[]|string>([]);
   const [showCart,setShowCart] = useState<boolean>(false);
@@ -23,10 +23,10 @@ function Page() {
   return (
     <MyContext.Provider value={{cart,setcart,setShowCart,showCart}}>
       {showCart&&<Cart/>}
-      <Header/>
       <Hero/>
       <Intro/>
       <Shop/>
+      <Footer/>
     </MyContext.Provider>
   )
 }

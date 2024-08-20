@@ -20,7 +20,6 @@ export default function Try(
         <p className="text-wrap">{Desrcription}</p>
        <div className="flex items-center justify-between">
         <p>{Price}</p>
-        <p className="bg-[#eaedf6] rounded-full px-[1em] py-[.7em]">Try on</p>
       </div>
        </div>
   </div>

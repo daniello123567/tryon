@@ -35,7 +35,7 @@ function Product({name,Description,Price,imageSrc,id,lensid,cameraType}:Props) {
 
   return (<>
         {addingEvent&&<Added/>}
-      <div className={`${sora.className} w-full rounded-[1.625em] p-[0.75em] bg-white pb-[1em]`}>
+      <div className={`${sora.className} w-full lg:w-[30.25em] rounded-[1.625em] p-[0.75em] bg-white pb-[1em]`}>
       <div className='bg-red-50 overflow-hidden rounded-[inherit] h-[18.75em]'>
  <img className='w-full h-full  object-cover' src={imageSrc} alt="" />
       </div>

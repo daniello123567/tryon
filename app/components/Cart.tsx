@@ -10,7 +10,7 @@ const glass = 'bg-white/50 backdrop-blur-md';
 
 function Cart() {
   const [products,setProducts] = useState<any[]>();
-  const {cart} = useContext(MyContext);
+  const {cart,setShowCart} = useContext(MyContext);
   const[l,setl] = useState<boolean>()
   const fetchFromBasedOnId = async (ids:Array<string>)=>{
      setl(true)
@@ -29,6 +29,7 @@ function Cart() {
   },[cart])
 
   return (
+    <div className='flex justify-center'>
     <div className={`${sora.className} grid place-items-center`}>
     <div className='fixed rounded-[1em] w-[80%] py-[1em] px-[1em] z-50 h-[80vh] bg-orange-400 top-[6em]'>
        <div className='flex justify-between'>
@@ -39,11 +40,13 @@ function Cart() {
         <p className={`${glass} w-[50%] text-white px-[1em] py-[.8em] rounded`}>Goods: {products?.length!=0?products?.length : 'no product'}</p>
        </div>
        <div>
-        {l&&<p>loadiing..</p>}
+        {l&&<p>Loading..</p>}
         {products?.length!=0&&products?.map((product:praiseGod)=>{
           return <Cartproducts stateSet={setProducts} id={product.id} Price={product.Price} Description={product.Descrition} Name={product.Name} key={product.id} imgSrc={product.ImageUrl} />
         })}
        </div>
+       <button onClick={()=>setShowCart(false)} className='absolute bottom-4 rounded-[inherit] right-4 backdrop-blur-md bg-white/50  px-[1em]' type='button'>Close</button>
+    </div>
     </div>
     </div>
   )

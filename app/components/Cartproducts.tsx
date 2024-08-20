@@ -23,7 +23,7 @@ const removeItem = ()=>{
           <p className='text-[.5em] text-wrap'>{Description}</p>
           <div className='flex justify-between items-center'>
             <p className='mt-[.5em] text-white w-max  rounded'>{Price}</p>
-          <p onClick={removeItem} ><Image width={20} height={20} alt='delete btn' src="/delete.png"/></p>
+          <p onClick={removeItem}><Image width={20} height={20} alt='delete btn' src="/delete.png"/></p>
           </div>
          </div>
       </div>

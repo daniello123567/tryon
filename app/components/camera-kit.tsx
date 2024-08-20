@@ -14,13 +14,22 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
       const camerakit = await bootstrapCameraKit({apiToken:"eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzIzNTA0OTI2LCJzdWIiOiIzZWQ3ZDcwZi0zOTc5LTQzM2UtYjk5ZC04NWYzNTdhN2RiODh-U1RBR0lOR35hY2VlZmU2OS1lMGQ2LTQ4YTMtYjM0Yi1hZjBjODZlZjA4MzcifQ.wa3_Y9ylQshupHPCClFe9Xr5ZPNTAgqxMz-6nYPDS8k"})
       const liveRenderTarget = document.getElementById('my-canvas') as HTMLCanvasElement|undefined
       const session = await camerakit.createSession({liveRenderTarget})
-      const mediaStream = await navigator.mediaDevices.getUserMedia({video:true});
+      const mediaStream = await navigator.mediaDevices.getUserMedia({video:{
+        width:1280,
+        height:720,
+        facingMode:cameraType=="front"?"user":"environment"
+      }});
       setbootstraploading(false)
       const source = createMediaStreamSource(mediaStream,{
         transform:Transform2D.MirrorX,
         cameraType:cameraType
+      });
+      session.events.addEventListener('error',(event)=>{
+       if(event.detail.error.name==="LensExecutionError")
+      alert('BAD INTERNET : PLEASE RELOAD BROWSER ASAP')
       })
       await session.setSource(source);
+      session.setFPSLimit(30)
       await session.play();
       setCamloading(true)
       const lens = await camerakit.lensRepository.loadLens(
@@ -51,5 +60,4 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
   )
 }
 
-export default Camera
-export const revalidate = 1;
+export default Camera;
