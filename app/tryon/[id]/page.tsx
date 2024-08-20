@@ -5,8 +5,7 @@ import { useParams, useSearchParams } from 'next/navigation';
 function Page() {
   const params = useParams();
   const searchParams = useSearchParams();
-  const cameraType = searchParams.get('cameraType') as "front"|"back"
-
+  const cameraType = searchParams.get('cameraType') as "front"|"back";
   return (
     <div>
       <Camera cameraType={cameraType} lensid={String(params.id)}/>
