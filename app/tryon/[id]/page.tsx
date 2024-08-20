@@ -1,8 +1,11 @@
+"use client"
 import React from 'react'
 import Camera from '@/app/components/camera-kit';
-import type { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
-function Page({params,searchParams}:{params:Params,searchParams:any}) {
-  const cameraType = searchParams.cameraType as "front"|"back"
+import { useParams, useSearchParams } from 'next/navigation';
+function Page() {
+  const params = useParams();
+  const searchParams = useSearchParams();
+  const cameraType = searchParams.get('cameraType') as "front"|"back";
   return (
       <Camera cameraType={cameraType} lensid={String(params.id)}/>
   )
