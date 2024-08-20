@@ -13,17 +13,18 @@ const removeItem = ()=>{
 }
 
   return (
-    <div className='backdrop-blur-md mt-[1em] overflow-hidden h-[6em] rounded bg-white/50 '>
+    <div className='backdrop-blur-md mt-[1em] overflow-hidden h-[6.5em] rounded bg-white/50 '>
       <div className='flex h-full w-full'>
         <div className='h-full w-[40%]'>
           <img className='w-full h-full object-cover' src={imgSrc} alt={`image for ${Name}`} />
         </div>
-         <div className='p-[.4em] w-[50%]'>
+         <div className='p-[.4em]  pb-[.6em] w-[50%]'>
           <p className='font-semibold text-nowrap'>{Name}</p>
           <p className='text-[.5em] text-wrap'>{Description}</p>
           <div className='flex justify-between items-center'>
             <p className='mt-[.5em] text-white w-max  rounded'>{Price}</p>
-          <p onClick={removeItem}><Image width={20} height={20} alt='delete btn' src="/delete.png"/></p>
+          <p onClick={removeItem}>
+            <Image width={20} height={20} alt='delete btn' src="/delete.png"/></p>
           </div>
          </div>
       </div>

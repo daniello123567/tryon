@@ -21,7 +21,7 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
       }});
       setbootstraploading(false)
       const source = createMediaStreamSource(mediaStream,{
-        transform:Transform2D.MirrorX,
+        transform:cameraType=="front"?Transform2D.MirrorX:Transform2D.MirrorY,
         cameraType:cameraType
       });
       session.events.addEventListener('error',(event)=>{
@@ -41,7 +41,7 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
       setCamloading(false)
     }
    activateCamera()
-  },[lensid]);
+  },[lensid,cameraType]);
   setTimeout(()=>setbootstraploading(false),3000)
   return (<div className={`${sora.className}`}>
      <div className='grid place-items-center'>
@@ -61,3 +61,4 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
 }
 
 export default Camera;
+export const revalidate = 0;
