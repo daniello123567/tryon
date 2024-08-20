@@ -32,6 +32,7 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
       }
       setbootstraploading(false)
       const source = createMediaStreamSource(mediaStream,frontotback());
+      source.setRenderSize(window.innerWidth,window.innerHeight)
       session.events.addEventListener('error',(event)=>{
        if(event.detail.error.name==="LensExecutionError")
       alert('BAD INTERNET : PLEASE RELOAD BROWSER ASAP')
@@ -44,7 +45,6 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
         `${lensid}`,
         "d971f3e4-ea9c-4864-bb83-d53f41811cf7"
       );
-    source.setRenderSize(window.innerWidth,window.innerHeight)
       await session.applyLens(lens)
       setCamloading(false)
     }
