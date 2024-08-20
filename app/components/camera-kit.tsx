@@ -28,7 +28,7 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
         }else{
    return {
     cameraType:cameraType,
-    transform: Transform2D.MirrorX,
+    transform: Transform2D.MirrorY,
    }
         }
       }
