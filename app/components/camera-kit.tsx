@@ -13,33 +13,27 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
       setbootstraploading(true);
       const camerakit = await bootstrapCameraKit({apiToken:"eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzIzNTA0OTI2LCJzdWIiOiIzZWQ3ZDcwZi0zOTc5LTQzM2UtYjk5ZC04NWYzNTdhN2RiODh-U1RBR0lOR35hY2VlZmU2OS1lMGQ2LTQ4YTMtYjM0Yi1hZjBjODZlZjA4MzcifQ.wa3_Y9ylQshupHPCClFe9Xr5ZPNTAgqxMz-6nYPDS8k"})
       const liveRenderTarget = document.getElementById('my-canvas') as HTMLCanvasElement|undefined
-      const session = await camerakit.createSession({liveRenderTarget})
+      const session = await camerakit.createSession({liveRenderTarget});
       const mediaStream = await navigator.mediaDevices.getUserMedia({video:{
+        height:720,
         facingMode:cameraType=="front"?"user":"environment",
       }    });
-      const frontotback = ()=>{
-        if(cameraType=="front"){
-          return {
-            transform: Transform2D.MirrorX,
-            cameraType:cameraType
-          }
-        }else{
-   return {
-    cameraType:cameraType,
-    transform: Transform2D.MirrorX,
-   }
-        }
-      }
-      setbootstraploading(false)
-      const source = createMediaStreamSource(mediaStream,frontotback());
-      source.setRenderSize(window.innerWidth,window.innerHeight)
+
+
+      const source = createMediaStreamSource(mediaStream,{
+        cameraType:cameraType,
+        transform: Transform2D.MirrorX,
+      });
       session.events.addEventListener('error',(event)=>{
        if(event.detail.error.name==="LensExecutionError")
       alert('BAD INTERNET : PLEASE RELOAD BROWSER ASAP')
       })
       await session.setSource(source);
       session.setFPSLimit(30)
+      source.setRenderSize(window.innerWidth,window.innerHeight)
       await session.play();
+      setbootstraploading(false)
+
       setCamloading(true)
       const lens = await camerakit.lensRepository.loadLens(
         `${lensid}`,
@@ -47,10 +41,10 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
       );
       await session.applyLens(lens)
       setCamloading(false)
+
     }
    activateCamera()
   },[lensid,cameraType]);
-  setTimeout(()=>setbootstraploading(false),3000)
   return (<div className={`${sora.className}`}>
      <div className='grid place-items-center'>
       {bootstrapLoading&&
@@ -58,7 +52,7 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
         Getting snap sdk set..
         <Image className='rounded' src='/bootstrapping.gif' width={20} height={20} alt='spanner' />
       </div>}
-      {camLoading&&<div className='flex w-max backdrop-blur-md bg-white/50 absolute top-[50%] rounded-full px-[1em] py-[.8em] items-center'>
+      {camLoading&&<div className='flex w-max z-50 text-black backdrop-blur-md bg-white/50 absolute top-[50%] rounded-full px-[1em] py-[.8em] items-center'>
         preparing the asset..
         patience please
         <Image className='rounded' src='/camera.gif' width={20} height={20} alt='spanner'/>
