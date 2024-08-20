@@ -1,12 +1,9 @@
 import React from 'react'
-import { Sora } from 'next/font/google'
-const sora = Sora({weight:"500",preload:false})
-function loading() {
+import Load from './components/loader'
+function Loading() {
   return (
-    <div className={`${sora.className} w-screen h-screen bg-blue-400 flex justify-center items-center`}>
-      Cuban Case. loading..
-    </div>
+    <Load/>
   )
 }
 
-export default loading
+export default Loading
