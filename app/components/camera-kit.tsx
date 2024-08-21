@@ -19,11 +19,19 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
         facingMode:cameraType=="front"?"user":"environment",
       }    });
 
-
-      const source = createMediaStreamSource(mediaStream,{
-        cameraType:cameraType,
-        transform: Transform2D.MirrorX,
-      });
+      const selectCam = ()=>{
+        if(cameraType==="front"){
+          return {
+            cameraType:cameraType,
+            transform: Transform2D.MirrorX,
+          }
+        }else {
+          return {
+            cameraType:cameraType
+          }
+        }
+      }
+      const source = createMediaStreamSource(mediaStream,selectCam());
       session.events.addEventListener('error',(event)=>{
        if(event.detail.error.name==="LensExecutionError")
       alert('BAD INTERNET : PLEASE RELOAD BROWSER ASAP')
@@ -63,4 +71,4 @@ function Camera({lensid,cameraType}:{lensid:string,cameraType:"front"|"back"}) {
 }
 
 export default Camera;
-export const revalidate = 1;
+export const revalidate = 0;
